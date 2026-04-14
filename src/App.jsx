@@ -134,7 +134,7 @@ lg:sticky lg:top-6 lg:self-start">
             <h1 className="max-w-4xl text-4xl font-bold leading-tight md:text-6xl">
               Full-Stack <span className="text-[#7FAAFF]">Software Engineer</span>
               <br />
-              Building Real-World{" "}
+              Building Scalable Systems & Real Business Solutions{" "}
               <span className="text-[#4B84FF]">Applications</span>
             </h1>
 
@@ -149,7 +149,7 @@ lg:sticky lg:top-6 lg:self-start">
                 href="#projects"
                 className="rounded-full bg-[#4B84FF] px-6 py-3 font-medium text-white shadow-lg shadow-[#0047AB]/30 transition hover:scale-[1.02]"
               >
-                View Projects
+                Explore Projects
               </a>
               <a
                 href="#about"
@@ -227,6 +227,7 @@ lg:sticky lg:top-6 lg:self-start">
     </div>
 
     <h2 className="mt-2 text-3xl font-bold">Selected Work</h2>
+    <p>Full-stack CRUD platform used to manage job applications with analytics dashboard (Flask + MySQL)</p>
 
     <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3 items-stretch">
       {[
