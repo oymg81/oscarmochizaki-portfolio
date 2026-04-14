@@ -1,322 +1,344 @@
-import { ArrowRight } from "lucide-react";
+export default function OscarMochizakiPortfolio() {
+  const projects = [
+    {
+      title: "BodaGift",
+      desc: "An event gifting platform with elegant event pages, personalized links, and a refined user experience for modern couples.",
+      stack: "React • Supabase • UI/UX",
+      href: "#",
+    },
+    {
+      title: "MyPobox",
+      desc: "A logistics and PO Box workflow platform connecting registration, shipments, payments, and automated notifications.",
+      stack: "WordPress • PHP • APIs • Stripe",
+      href: "#",
+    },
+    {
+      title: "Job Tracker",
+      desc: "A full-stack CRUD platform to manage companies, jobs, contacts, and applications with dashboard analytics.",
+      stack: "Flask • MySQL • Chart.js",
+      href: "https://github.com/oymg81/job-tracker-app",
+    },
+  ];
 
-const projects = [
-  {
-    name: "BodaGift",
-    description:
-      "Event gifting platform with personalized links, modern UI, and scalable architecture for real users.",
-    stack: ["React", "Supabase", "UI/UX"],
-    href: "#",
-  },
-  {
-    name: "MyPobox",
-    description:
-      "Logistics workflow platform integrating customer registration, shipments, payments, and automated notifications.",
-    stack: ["WordPress", "PHP", "APIs", "Stripe"],
-    href: "#",
-  },
-  {
-    name: "Job Tracker",
-    description:
-      "Full-stack application to manage companies, jobs, contacts, and applications with dashboard insights.",
-    stack: ["Flask", "MySQL", "Chart.js"],
-    href: "https://github.com/oymg81/job-tracker-app",
-  },
-];
+  const skills = [
+    "Java",
+    "Python",
+    "React",
+    "Node.js",
+    "SQL",
+    "Flask",
+    "Supabase",
+    "Git/GitHub",
+  ];
 
-const techStack = [
-  "Java",
-  "Python",
-  "React",
-  "Node.js",
-  "SQL",
-  "Flask",
-  "Supabase",
-  "Git/GitHub",
-];
-
-const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
-];
-
-const sidebarItems = [
-  { label: "Overview", href: "#top", active: true },
-  { label: "About Me", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Tech Stack", href: "#skills" },
-  { label: "Contact", href: "#contact" },
-];
-
-function Pill({ children }) {
   return (
-    <span className="rounded-full border border-blue-400/20 bg-[#0f214d] px-4 py-2 text-sm text-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
-      {children}
-    </span>
-  );
-}
-
-function SectionLabel({ children }) {
-  return (
-    <p className="mb-4 text-xs uppercase tracking-[0.35em] text-blue-300/80">
-      {children}
-    </p>
-  );
-}
-
-function Card({ children, className = "" }) {
-  return (
-    <div
-      className={`rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(19,28,52,0.96),rgba(8,16,33,0.96))] shadow-[0_20px_80px_rgba(0,0,0,0.45)] ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
-
-function ProgressBar({ label, value }) {
-  return (
-    <div>
-      <div className="mb-2 flex items-center justify-between text-sm text-slate-300">
-        <span>{label}</span>
-        <span className="text-slate-400">{value}%</span>
+    <div className="min-h-screen bg-[#070D1A] text-white overflow-x-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-20 -left-20 h-80 w-80 rounded-full bg-[#0047AB]/25 blur-3xl" />
+        <div className="absolute bottom-10 right-10 h-96 w-96 rounded-full bg-[#3D7BFF]/20 blur-3xl" />
+        <div className="absolute top-1/3 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[#1E5EFF]/10 blur-3xl" />
       </div>
-      <div className="h-2.5 rounded-full bg-white/10">
-        <div
-          className="h-2.5 rounded-full bg-[linear-gradient(90deg,#4f83ff,#5b8cff)]"
-          style={{ width: `${value}%` }}
-        />
-      </div>
-    </div>
-  );
-}
 
-export default function App() {
-  return (
-    <div
-      id="top"
-      className="min-h-screen bg-[#020817] text-white"
-      style={{
-        backgroundImage:
-          "radial-gradient(circle at 82% 18%, rgba(41,98,255,0.14), transparent 22%), radial-gradient(circle at 70% 70%, rgba(59,130,246,0.12), transparent 24%), linear-gradient(180deg, #020817 0%, #030b1e 100%)",
-      }}
-    >
-      <div className="mx-auto max-w-[1500px] px-5 py-6 sm:px-8 lg:px-10">
-        <header className="mb-6 flex items-center justify-between gap-4">
-          <a href="#top" className="text-2xl font-semibold tracking-tight text-white">
-            Oscar M.
+      <header className="relative z-10 mx-auto flex max-w-[1500px] items-center justify-between px-6 py-6 lg:px-10">
+        <div className="text-2xl font-bold tracking-tight">Oscar Mochizaki</div>
+
+        <nav className="hidden items-center gap-8 text-sm text-slate-300 md:flex">
+          <a href="#about" className="transition hover:text-white">
+            About
           </a>
+          <a href="#projects" className="transition hover:text-white">
+            Projects
+          </a>
+          <a href="#skills" className="transition hover:text-white">
+            Skills
+          </a>
+          <a href="#contact" className="transition hover:text-white">
+            Contact
+          </a>
+        </nav>
 
-          <nav className="hidden items-center gap-10 text-lg text-slate-300 md:flex">
-            {navItems.map((item) => (
-              <a key={item.label} href={item.href} className="transition hover:text-white">
-                {item.label}
-              </a>
-            ))}
-          </nav>
+        <a
+          href="#contact"
+          className="rounded-full border border-white/10 bg-[#0F1B35] px-4 py-2 text-sm text-white shadow-lg shadow-[#0047AB]/20 transition hover:bg-[#132348]"
+        >
+          Let’s Talk
+        </a>
+      </header>
 
-          <a
-            href="#contact"
-            className="rounded-full border border-blue-400/20 bg-[linear-gradient(180deg,rgba(22,38,84,0.95),rgba(10,25,59,0.95))] px-6 py-3 text-lg text-white shadow-[0_12px_30px_rgba(0,0,0,0.25)] transition hover:border-blue-300/40 hover:bg-[#173372]"
+      <main className="relative z-10 mx-auto grid max-w-[1600px] w-full gap-8 px-6 pb-16 pt-4 lg:grid-cols-[280px_1fr] lg:px-10">
+        <aside className="rounded-[28px] border border-white/10 bg-white/5 p-5 backdrop-blur-xl 
+lg:sticky lg:top-6 lg:self-start">
+          <div className="mb-6 rounded-2xl border border-white/10 bg-gradient-to-br from-[#143168] to-[#091225] p-5 shadow-2xl shadow-[#0047AB]/20">
+            <div className="mb-2 text-sm text-slate-300">Software Engineer</div>
+            <h2 className="text-2xl font-bold">Oscar Mochizaki</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-300">
+              Building clean, scalable software experiences with strong backend
+              logic and modern frontend design.
+            </p>
+          </div>
+
+          <div className="space-y-2 text-sm">
+            <a
+              href="#overview"
+              className="block rounded-full bg-[#4B84FF] px-4 py-3 font-medium text-white"
+            >
+              Overview
+            </a>
+            <a
+              href="#about"
+              className="block rounded-full px-4 py-3 text-slate-300 transition hover:bg-white/5 hover:text-white"
+            >
+              About Me
+            </a>
+            <a
+              href="#projects"
+              className="block rounded-full px-4 py-3 text-slate-300 transition hover:bg-white/5 hover:text-white"
+            >
+              Projects
+            </a>
+            <a
+              href="#skills"
+              className="block rounded-full px-4 py-3 text-slate-300 transition hover:bg-white/5 hover:text-white"
+            >
+              Tech Stack
+            </a>
+            <a
+              href="#contact"
+              className="block rounded-full px-4 py-3 text-slate-300 transition hover:bg-white/5 hover:text-white"
+            >
+              Contact
+            </a>
+          </div>
+
+          <div className="mt-8 grid grid-cols-2 gap-3 text-center">
+            <div className="rounded-2xl border border-white/10 bg-[#0D1529] p-4">
+              <div className="text-2xl font-bold">3+</div>
+              <div className="mt-1 text-xs text-slate-400">Core projects</div>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-[#0D1529] p-4">
+              <div className="text-2xl font-bold">100%</div>
+              <div className="mt-1 text-xs text-slate-400">Design + logic</div>
+            </div>
+          </div>
+        </aside>
+
+        <section className="space-y-8">
+          <section
+            id="overview"
+            className="rounded-[32px] border border-white/10 bg-gradient-to-br from-[#091225] via-[#0A1630] to-[#0E1530] px-8 py-12 shadow-2xl shadow-black/20"
           >
-            Let’s Talk
-          </a>
-        </header>
-
-        <div className="grid gap-8 lg:grid-cols-[310px_minmax(0,1fr)]">
-          <aside className="lg:sticky lg:top-8 lg:self-start">
-            <Card className="p-6">
-              <Card className="mb-6 p-6">
-                <p className="mb-4 text-xl text-slate-300">Software Engineer</p>
-                <h2 className="mb-5 text-[2rem] font-semibold leading-tight">
-                  Oscar Mochizaki
-                </h2>
-                <p className="text-lg leading-9 text-slate-300">
-                  Building clean, scalable software experiences with strong backend
-                  logic and modern frontend design.
-                </p>
-              </Card>
-
-              <div className="space-y-3">
-                {sidebarItems.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className={`block rounded-full px-5 py-4 text-lg transition ${
-                      item.active
-                        ? "bg-[linear-gradient(90deg,#4e81f5,#5687ea)] text-white shadow-[0_14px_30px_rgba(77,129,245,0.25)]"
-                        : "text-slate-300 hover:bg-white/5 hover:text-white"
-                    }`}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-
-              <div className="mt-10 grid grid-cols-2 gap-4">
-                <Card className="p-5 text-center">
-                  <p className="text-4xl font-semibold">3+</p>
-                  <p className="mt-2 text-sm text-slate-400">Featured projects</p>
-                </Card>
-                <Card className="p-5 text-center">
-                  <p className="text-4xl font-semibold">100%</p>
-                  <p className="mt-2 text-sm text-slate-400">Built with intent</p>
-                </Card>
-              </div>
-            </Card>
-          </aside>
-
-          <main className="space-y-8">
-            <Card className="overflow-hidden p-8 md:p-10 lg:p-12">
-              <div className="mb-8 inline-flex rounded-full border border-blue-400/30 bg-[#0f214d] px-5 py-2 text-lg text-blue-100">
-                Hi, I’m Oscar Mochizaki
-              </div>
-
-              <h1 className="max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl xl:text-[5.3rem]">
-                Full-Stack <span className="text-[#77a2ff]">Software</span> Engineer
-                <br className="hidden xl:block" /> Building Real-World{" "}
-                <span className="text-[#4f83ff]">Applications</span>
-              </h1>
-
-              <p className="mt-8 max-w-4xl text-xl leading-10 text-slate-300 md:text-[1.75rem] md:leading-[3.2rem]">
-                I design and build thoughtful digital products across web apps,
-                internal tools, and scalable software systems. My focus is turning
-                real ideas into structured, useful, and modern experiences.
-              </p>
-
-              <div className="mt-10 flex flex-wrap gap-4">
-                <a
-                  href="#projects"
-                  className="inline-flex items-center gap-2 rounded-full bg-[linear-gradient(90deg,#4e81f5,#5687ea)] px-7 py-4 text-xl text-white shadow-[0_14px_30px_rgba(77,129,245,0.28)] transition hover:translate-y-[-1px]"
-                >
-                  View Projects
-                  <ArrowRight size={20} />
-                </a>
-                <a
-                  href="#about"
-                  className="rounded-full border border-white/10 bg-white/[0.03] px-7 py-4 text-xl text-white transition hover:bg-white/10"
-                >
-                  About Me
-                </a>
-              </div>
-            </Card>
-
-            <div className="grid gap-8 xl:grid-cols-[1.45fr_0.85fr]">
-              <section id="about">
-                <Card className="h-full p-8 md:p-10">
-                  <SectionLabel>About Me</SectionLabel>
-                  <h2 className="max-w-2xl text-4xl font-semibold leading-tight md:text-5xl">
-                    Software Engineer focused on clean execution
-                  </h2>
-                  <div className="mt-8 space-y-6 text-lg leading-9 text-slate-300 md:text-[1.45rem] md:leading-[3rem]">
-                    <p>
-                      Software Engineer focused on building practical, scalable
-                      applications. I develop full-stack systems that combine clean
-                      frontend design with strong backend logic and real-world usability.
-                    </p>
-                    <p>
-                      My work includes portfolio-grade products, CRUD platforms,
-                      logistics flows, integrations, and modern UI systems designed to
-                      feel clear, scalable, and meaningful.
-                    </p>
-                  </div>
-                </Card>
-              </section>
-
-              <section>
-                <Card className="h-full p-8 md:p-10">
-                  <SectionLabel>Highlights</SectionLabel>
-                  <div className="mt-10 space-y-8">
-                    <ProgressBar label="Frontend Design" value={90} />
-                    <ProgressBar label="Backend Logic" value={88} />
-                    <ProgressBar label="Problem Solving" value={92} />
-                  </div>
-                </Card>
-              </section>
+            <div className="mb-4 inline-flex items-center rounded-full border border-[#4B84FF]/30 bg-[#4B84FF]/10 px-4 py-1 text-sm text-[#A9C4FF]">
+              Hi, I’m Oscar Mochizaki
             </div>
 
-            <section id="projects">
-              <Card className="p-8 md:p-10">
-                <SectionLabel>Projects</SectionLabel>
-                <h2 className="text-4xl font-semibold md:text-5xl">Selected Work</h2>
+            <h1 className="max-w-4xl text-4xl font-bold leading-tight md:text-6xl">
+              Full-Stack <span className="text-[#7FAAFF]">Software Engineer</span>
+              <br />
+              Building Real-World{" "}
+              <span className="text-[#4B84FF]">Applications</span>
+            </h1>
 
-                <div className="mt-10 grid gap-6 xl:grid-cols-3">
-                  {projects.map((project) => (
-                    <a
-                      key={project.name}
-                      href={project.href}
-                      className="group rounded-[1.8rem] border border-blue-300/10 bg-[linear-gradient(180deg,rgba(8,20,49,0.88),rgba(5,17,40,0.95))] p-7 transition hover:-translate-y-1 hover:border-blue-400/25 hover:shadow-[0_20px_50px_rgba(46,106,255,0.14)]"
-                    >
-                      <h3 className="text-2xl font-semibold text-white">{project.name}</h3>
-                      <p className="mt-5 text-lg leading-9 text-slate-300">
-                        {project.description}
-                      </p>
-                      <p className="mt-7 text-base text-[#8fb0ff]">
-                        {project.stack.join(" • ")}
-                      </p>
-                    </a>
-                  ))}
-                </div>
-              </Card>
-            </section>
+            <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300 md:text-lg">
+              I build modern web applications, internal tools, and scalable
+              software systems with a strong focus on clean architecture,
+              usability, and real-world value.
+            </p>
 
-            <section id="skills">
-              <Card className="p-8 md:p-10">
-                <SectionLabel>Tech Stack</SectionLabel>
-                <h2 className="text-4xl font-semibold md:text-5xl">Technical Stack</h2>
-                <div className="mt-10 flex flex-wrap gap-4">
-                  {techStack.map((item) => (
-                    <Pill key={item}>{item}</Pill>
-                  ))}
-                </div>
-              </Card>
-            </section>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <a
+                href="#projects"
+                className="rounded-full bg-[#4B84FF] px-6 py-3 font-medium text-white shadow-lg shadow-[#0047AB]/30 transition hover:scale-[1.02]"
+              >
+                View Projects
+              </a>
+              <a
+                href="#about"
+                className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10"
+              >
+                About Me
+              </a>
+            </div>
+          </section>
 
-            <section id="contact">
-              <Card className="bg-[linear-gradient(135deg,rgba(14,28,65,0.98),rgba(20,43,96,0.95))] p-8 md:p-10">
-                <SectionLabel>Contact</SectionLabel>
-                <h2 className="max-w-3xl text-4xl font-semibold leading-tight md:text-5xl">
-                  Let’s build something real
-                </h2>
-                <p className="mt-6 max-w-4xl text-lg leading-9 text-slate-300 md:text-[1.35rem] md:leading-[2.8rem]">
-                  Available for software engineering opportunities, collaborations,
-                  and product-focused projects that need thoughtful engineering and
-                  clean design.
-                </p>
-
-                <div className="mt-10 flex flex-wrap gap-4">
-                  <a
-  href="mailto:oymg81@gmail.com"
-  className="inline-flex items-center gap-3 rounded-full bg-[linear-gradient(90deg,#4e81f5,#5687ea)] px-7 py-4 text-lg text-white shadow-[0_14px_30px_rgba(77,129,245,0.28)] transition hover:translate-y-[-1px]"
+          {/* ABOUT + HIGHLIGHTS */}
+<section
+  id="about"
+  className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr] items-stretch"
 >
-  Email Me
-</a>
-                 <a
-  href="https://github.com/oymg81"
-  target="_blank"
-  rel="noreferrer"
-  className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-7 py-4 text-lg text-white transition hover:bg-white/10"
->
-  GitHub
-</a>
+  <div className="min-h-[290px] h-full rounded-[28px] border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+    <div className="mb-3 text-sm uppercase tracking-[0.2em] text-[#8CB2FF]">
+      About Me
+    </div>
 
-                  <a
-                    href="https://www.linkedin.com/in/oscar-mochizaki20"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-7 py-4 text-lg text-white transition hover:bg-white/10"
-                  >
-                   
-                    LinkedIn
-                  </a>
-                </div>
-              </Card>
-            </section>
-          </main>
+    <h2 className="text-3xl font-bold">
+      Software Engineer building scalable digital products
+    </h2>
+
+    <p className="mt-5 leading-8 text-slate-300">
+      I’m Oscar Mochizaki, a Software Engineer focused on building
+      practical digital products that combine polished frontend
+      experiences, strong backend logic, and clean system design.
+    </p>
+
+    <p className="mt-4 leading-8 text-slate-300">
+      My work includes full-stack applications, dashboards, logistics
+      workflows, portfolio-grade websites, and scalable integrations
+      for real business use cases.
+    </p>
+  </div>
+
+  <div className="min-h-[290px] h-full rounded-[28px] border border-white/10 bg-[#0D1529] p-8 flex flex-col justify-center">
+    <div className="mb-6 text-sm uppercase tracking-[0.2em] text-[#8CB2FF]">
+      Highlights
+    </div>
+
+    <div className="space-y-5">
+      {[
+        { label: "Frontend Design", value: 90 },
+        { label: "Backend Logic", value: 88 },
+        { label: "Problem Solving", value: 92 },
+      ].map((item) => (
+        <div key={item.label}>
+          <div className="mb-2 flex items-center justify-between text-sm">
+            <span className="text-slate-300">{item.label}</span>
+            <span className="text-slate-400">{item.value}%</span>
+          </div>
+
+          <div className="h-2 rounded-full bg-white/10">
+            <div
+              className="h-2 rounded-full bg-[#4B84FF]"
+              style={{ width: `${item.value}%` }}
+            />
+          </div>
         </div>
-      </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* PROJECTS + TECH STACK */}
+<div className="grid gap-8 xl:grid-cols-[2fr_1fr] items-stretch">
+  <section
+    id="projects"
+    className="min-h-[380px] h-full rounded-[28px] border border-white/10 bg-white/5 p-8 backdrop-blur-xl"
+  >
+    <div className="text-sm uppercase tracking-[0.2em] text-[#8CB2FF]">
+      Projects
+    </div>
+
+    <h2 className="mt-2 text-3xl font-bold">Selected Work</h2>
+
+    <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3 items-stretch">
+      {[
+        {
+          title: "BodaGift",
+          desc: "An event gifting platform with elegant event pages, personalized links, and a refined user experience for modern couples.",
+          tech: "React • Supabase • UI/UX",
+        },
+        {
+          title: "MyPobox",
+          desc: "A logistics and PO Box workflow platform connecting registration, shipments, payments, and automated notifications.",
+          tech: "WordPress • PHP • APIs • Stripe",
+        },
+        {
+          title: "Job Tracker",
+          desc: "A full-stack CRUD platform to manage companies, jobs, contacts, and applications with dashboard analytics.",
+          tech: "Flask • MySQL • Chart.js",
+        },
+      ].map((project) => (
+        <div
+          key={project.title}
+          className="h-full rounded-[24px] border border-white/10 bg-[#0D1529] p-6 transition hover:-translate-y-1 hover:border-[#4B84FF]/40"
+        >
+          <h3 className="text-lg font-semibold">{project.title}</h3>
+
+          <p className="mt-3 text-sm leading-6 text-slate-300">
+            {project.desc}
+          </p>
+
+          <div className="mt-4 text-sm text-[#8CB2FF]">
+            {project.tech}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section
+    id="skills"
+    className="min-h-[380px] h-full rounded-[28px] border border-white/10 bg-[#0D1529] p-8 flex flex-col"
+  >
+    <div className="text-sm uppercase tracking-[0.2em] text-[#8CB2FF]">
+      Tech Stack
+    </div>
+
+    <h2 className="mt-2 text-3xl font-bold">Technical Stack</h2>
+    <p className="mt-6 text-sm leading-7 text-slate-300">
+  I work across frontend, backend, databases, and developer tools to build clean and scalable software systems.
+</p>
+    <div className="mt-6 flex flex-wrap gap-3 content-start">
+      {[
+        "Java",
+        "Python",
+        "React",
+        "Node.js",
+        "SQL",
+        "Flask",
+        "Supabase",
+        "Git/GitHub",
+      ].map((tech) => (
+        <span
+          key={tech}
+          className="rounded-full border border-white/10 bg-[#0F1A34] px-4 py-2 text-sm text-slate-300"
+        >
+          {tech}
+        </span>
+      ))}
+    </div>
+  </section>
+</div>
+
+
+          <footer
+            id="contact"
+            className="rounded-[28px] border border-white/10 bg-gradient-to-r from-[#0B1428] to-[#11224A] p-8"
+          >
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div>
+                <div className="mb-3 text-sm uppercase tracking-[0.2em] text-[#8CB2FF]">
+                  Contact
+                </div>
+                <h2 className="text-3xl font-bold">Let’s build something real</h2>
+              </div>
+
+              <div className="flex flex-wrap gap-4 md:justify-end">
+                <a
+                  href="mailto:oymg81@gmail.com"
+                  className="rounded-full bg-[#4B84FF] px-6 py-3 font-medium text-white shadow-lg shadow-[#0047AB]/30 transition hover:scale-[1.02]"
+                >
+                  Email
+                </a>
+                <a
+                  href="https://github.com/oymg81"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/oscar-mochizaki20"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10"
+                >
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </footer>
+        </section>
+      </main>
     </div>
   );
 }
