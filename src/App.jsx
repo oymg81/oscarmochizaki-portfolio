@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import Yo1 from './assets/Yo1.png';
 import { translations } from './translations';
+import { supabase } from "./supabaseClient";
 
 export default function OscarMochizakiPortfolio() {
   const [lang, setLang] = useState('en');
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   const [showBubble, setShowBubble] = useState(false);
+  const [likes, setLikes] = useState(0);
+  const [liked, setLiked] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,6 +21,44 @@ export default function OscarMochizakiPortfolio() {
   useEffect(() => {
     if (isChatOpen) setShowBubble(false);
   }, [isChatOpen]);
+
+  useEffect(() => {
+    const fetchLikes = async () => {
+      const { count, error } = await supabase
+        .from("portfolio_likes")
+        .select("*", { count: "exact", head: true });
+
+      if (!error) {
+        setLikes(count || 0);
+      } else {
+        console.error("Error fetching likes:", error);
+      }
+    };
+
+    fetchLikes();
+
+    const alreadyLiked = localStorage.getItem("portfolio_liked");
+
+    if (alreadyLiked) {
+      setLiked(true);
+    }
+  }, []);
+
+  const handleLike = async () => {
+    if (liked) return;
+
+    const { error } = await supabase
+      .from("portfolio_likes")
+      .insert({});
+
+    if (!error) {
+      setLikes((prev) => prev + 1);
+      setLiked(true);
+      localStorage.setItem("portfolio_liked", "true");
+    } else {
+      console.error("Error adding like:", error);
+    }
+  };
 
   const t = translations[lang];
   const closeModal = () => setModalContent(null);
@@ -39,16 +80,16 @@ export default function OscarMochizakiPortfolio() {
           <a href="#public-projects" className="transition hover:text-white">{t.nav.projects}</a>
           <a href="#solutions" className="transition hover:text-white">{t.nav.solutions}</a>
           <a href="#contact" className="transition hover:text-white">{t.nav.contact}</a>
-          
+
           {/* Language Switcher */}
           <div className="flex items-center gap-2 bg-white/5 rounded-full p-1 border border-white/10 ml-4">
-            <button 
+            <button
               onClick={() => setLang('en')}
               className={`px-3 py-1 rounded-full text-xs transition ${lang === 'en' ? 'bg-[#4B84FF] text-white font-bold' : 'text-slate-400 hover:text-white'}`}
             >
               EN 🇺🇸
             </button>
-            <button 
+            <button
               onClick={() => setLang('es')}
               className={`px-3 py-1 rounded-full text-xs transition ${lang === 'es' ? 'bg-[#4B84FF] text-white font-bold' : 'text-slate-400 hover:text-white'}`}
             >
@@ -70,7 +111,7 @@ export default function OscarMochizakiPortfolio() {
 
       {/* Main Layout */}
       <main className="relative z-10 mx-auto grid max-w-[1600px] w-full gap-8 px-6 pb-16 pt-4 lg:grid-cols-[280px_1fr] lg:px-10">
-        
+
         {/* Sidebar */}
         <aside className="rounded-[28px] border border-white/10 bg-white/5 p-5 backdrop-blur-xl lg:sticky lg:top-6 lg:self-start">
           <div className="mb-6 rounded-2xl border border-white/10 bg-gradient-to-br from-[#143168] to-[#091225] p-5 shadow-2xl shadow-[#0047AB]/20 text-center">
@@ -94,7 +135,7 @@ export default function OscarMochizakiPortfolio() {
 
         {/* Content */}
         <section className="space-y-6">
-          
+
           {/* 1. Hero Section */}
           <section id="overview" className="rounded-[32px] border border-white/10 bg-gradient-to-br from-[#091225] via-[#0A1630] to-[#0E1530] px-8 py-8 shadow-2xl shadow-black/20 flex flex-col md:flex-row gap-6 items-center md:items-start justify-between">
             <div className="flex-1">
@@ -116,9 +157,20 @@ export default function OscarMochizakiPortfolio() {
                 <a href={whatsappLink} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">
                   {t.hero.workWithMe}
                 </a>
+                <button
+                  onClick={handleLike}
+                  disabled={liked}
+                  className={`rounded-full px-6 py-3 font-medium transition-all duration-300 flex items-center gap-2 ${
+                    liked
+                      ? "bg-pink-500/20 text-pink-300 border border-pink-400/30 cursor-not-allowed"
+                      : "bg-white/5 text-white border border-white/15 hover:bg-pink-500/20 hover:border-pink-400/40 hover:scale-105"
+                  }`}
+                >
+                  ❤️ {liked ? "Liked" : "Like"} · {likes}
+                </button>
               </div>
             </div>
-            
+
             {/* Hero Image */}
             <div className="w-48 h-48 md:w-64 md:h-64 shrink-0 rounded-[28px] border-[2px] border-[#4B84FF]/30 shadow-2xl shadow-[#0047AB]/40 overflow-hidden bg-[#0A1630] backdrop-blur-md">
               <img src={Yo1} alt="Oscar Mochizaki" className="w-full h-full object-cover object-top hover:scale-105 transition duration-500" />
@@ -138,21 +190,22 @@ export default function OscarMochizakiPortfolio() {
                   desc: t.publicProjects.jobTrackerDesc,
                   tech: "Flask • MySQL • Dashboard • CRUD",
                   cta: t.publicProjects.viewProject,
-                  link: "https://github.com/oymg81/job-tracker-app"
+                  github: "https://github.com/oymg81/job-tracker-app",
+                  demo: "https://youtu.be/Bvz3lIjeNAc"
                 },
                 {
                   title: "Foods Hub",
-                  desc: t.publicProjects.foodsHubDesc,
-                  tech: "React • Social App • Interactive UI",
-                  cta: t.publicProjects.viewGithub,
-                  link: "https://github.com/oymg81"
+                  desc: "Interactive social food-sharing application where users can create posts, upload food images, comment, and explore food content through a modern responsive UI.",
+                  tech: "React • JSON Server • Social App • Interactive UI",
+                  demo: "https://youtu.be/gYhQInnv-TM",
+                  github: "https://github.com/oymg81/foods-hub"
                 },
                 {
                   title: "Creatorverse",
-                  desc: t.publicProjects.creatorverseDesc,
+                  desc: "A React + Supabase CRUD app for managing content creators with dedicated creator pages, responsive card layouts, image support, and full create/edit/delete functionality.",
                   tech: "React • Supabase • CRUD • Web App",
-                  cta: t.publicProjects.viewGithub,
-                  link: "https://github.com/oymg81"
+                  demo: "https://youtu.be/R8-3kdX9Pfw",
+                  github: "https://github.com/oymg81/creatorverse",
                 }
               ].map((proj) => (
                 <div key={proj.title} className="rounded-[24px] border border-white/10 bg-[#0F1A34] p-6 transition hover:-translate-y-1 hover:border-[#4B84FF]/40 flex flex-col">
@@ -161,9 +214,29 @@ export default function OscarMochizakiPortfolio() {
                     <p className="mt-3 text-sm leading-6 text-slate-300">{proj.desc}</p>
                     <div className="mt-4 text-xs font-semibold text-[#8CB2FF]">{proj.tech}</div>
                   </div>
-                  <a href={proj.link} target="_blank" rel="noreferrer" className="mt-6 block text-center w-full rounded-full border border-[#4B84FF]/30 bg-[#4B84FF]/10 py-2 text-sm text-[#A9C4FF] transition hover:bg-[#4B84FF]/20">
-                    {proj.cta}
-                  </a>
+                  <div className="flex gap-3 mt-6">
+                    {proj.demo && (
+                      <a
+                        href={proj.demo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 text-center rounded-full bg-[#4B84FF] py-2 text-sm text-white transition hover:bg-[#3A6CE6]"
+                      >
+                        Watch Demo
+                      </a>
+                    )}
+
+                    {proj.github && (
+                      <a
+                        href={proj.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 text-center rounded-full border border-[#4B84FF]/30 bg-[#4B84FF]/10 py-2 text-sm text-[#A9C4FF] transition hover:bg-[#4B84FF]/20"
+                      >
+                        GitHub
+                      </a>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -174,7 +247,7 @@ export default function OscarMochizakiPortfolio() {
             <div className="text-sm uppercase tracking-[0.2em] text-[#8CB2FF]">{t.solutions.tag}</div>
             <h2 className="mt-2 text-3xl font-bold">{t.solutions.title}</h2>
             <p className="mt-2 text-slate-300 mb-8">{t.solutions.desc}</p>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {[
                 { title: t.solutions.restaurant, icon: "🍽️" },
@@ -210,8 +283,8 @@ export default function OscarMochizakiPortfolio() {
                   </p>
                   <div className="mt-4 text-sm text-[#8CB2FF]">React • Supabase • UI/UX • {t.projects.productConcept}</div>
                 </div>
-                <button 
-                  onClick={() => setModalContent({title: 'BodaGift', desc: t.projects.bodaModalDesc, type: t.projects.productConcept})}
+                <button
+                  onClick={() => setModalContent({ title: 'BodaGift', desc: t.projects.bodaModalDesc, type: t.projects.productConcept })}
                   className="mt-6 w-full rounded-full border border-white/10 bg-white/5 py-2 text-sm text-white transition hover:bg-white/10"
                 >
                   {t.projects.viewConcept}
@@ -228,8 +301,8 @@ export default function OscarMochizakiPortfolio() {
                   </p>
                   <div className="mt-4 text-sm text-[#8CB2FF]">WordPress • PHP • APIs • Stripe • Business System</div>
                 </div>
-                <button 
-                  onClick={() => setModalContent({title: 'MyPobox', desc: t.projects.mypoboxModalDesc, type: t.projects.privateSystem})}
+                <button
+                  onClick={() => setModalContent({ title: 'MyPobox', desc: t.projects.mypoboxModalDesc, type: t.projects.privateSystem })}
                   className="mt-6 w-full rounded-full border border-white/10 bg-white/5 py-2 text-sm text-white transition hover:bg-white/10"
                 >
                   {t.projects.viewSystem}
@@ -242,7 +315,7 @@ export default function OscarMochizakiPortfolio() {
           <section className="rounded-[32px] border border-[#4B84FF]/20 bg-gradient-to-r from-[#0D1830] to-[#142A5E] py-8 px-6 shadow-2xl text-center relative overflow-hidden">
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-[#4B84FF] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-[#7FAAFF] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-            
+
             <h2 className="text-3xl md:text-4xl font-bold relative z-10 text-white mb-4">{t.codingsoft.title}</h2>
             <p className="text-lg text-slate-300 max-w-3xl mx-auto mb-6 relative z-10 leading-relaxed">
               {t.codingsoft.desc1}<span className="font-semibold text-white">{t.codingsoft.desc2}</span>{t.codingsoft.desc3}
@@ -268,7 +341,7 @@ export default function OscarMochizakiPortfolio() {
 
             <div className="rounded-[28px] border border-white/10 bg-[#0D1529] p-8 lg:p-10 flex flex-col relative overflow-hidden">
               <div className="mb-6 text-sm uppercase tracking-[0.2em] text-[#8CB2FF]">{t.about.coreTag}</div>
-              
+
               <div className="flex flex-col gap-4 relative z-10 text-sm text-slate-300">
                 <div className="flex items-start gap-3">
                   <span className="text-[#4B84FF] mt-0.5">✦</span>
@@ -333,7 +406,7 @@ export default function OscarMochizakiPortfolio() {
 
       {/* Floating Elements */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4 items-end">
-        
+
         {/* Welcome Bubble */}
         {showBubble && !isChatOpen && (
           <div className="relative mb-2 mr-2 w-64 rounded-2xl border border-[#4B84FF]/30 bg-[#0D1529]/95 backdrop-blur-xl p-4 shadow-2xl shadow-[#0047AB]/20 animate-fade-in-up">
@@ -361,7 +434,7 @@ export default function OscarMochizakiPortfolio() {
               </div>
               <button onClick={() => setIsChatOpen(false)} className="text-slate-300 hover:text-white">&times;</button>
             </div>
-            
+
             <div className="p-4 max-h-[400px] overflow-y-auto flex flex-col gap-3">
               <div className="flex gap-3">
                 <div className="w-8 h-8 rounded-full border border-[#4B84FF] overflow-hidden bg-[#0A1630] shrink-0 mt-1">
@@ -375,7 +448,7 @@ export default function OscarMochizakiPortfolio() {
               <div className="bg-white/10 rounded-2xl rounded-tl-sm p-3 text-sm text-slate-200 font-medium self-end mr-8 ml-11">
                 {t.chat.ask}
               </div>
-              
+
               <div className="flex flex-col gap-2 mt-2">
                 {[
                   t.chat.opt1,
@@ -399,10 +472,10 @@ export default function OscarMochizakiPortfolio() {
             {t.chat.cta}
           </div>
           <a href={whatsappLink} target="_blank" rel="noreferrer" className="w-12 h-12 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg shadow-[#25D366]/30 hover:scale-110 transition cursor-pointer text-white">
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" /></svg>
           </a>
         </div>
-        
+
         {/* Chatbot Toggle Button */}
         <button onClick={() => setIsChatOpen(!isChatOpen)} className="w-14 h-14 bg-[#4B84FF] rounded-full flex items-center justify-center shadow-lg shadow-[#0047AB]/40 hover:scale-110 transition text-white backdrop-blur-md border border-white/20">
           {isChatOpen ? (
