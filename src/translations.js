@@ -26,12 +26,19 @@ export const translations = {
       workWithMe: "Work With Me"
     },
     publicProjects: {
-      tag: "Open Source",
-      title: "Public Engineering Projects",
-      desc: "Public GitHub repositories demonstrating my stack and coding capabilities.",
-      jobTrackerDesc: "Full-stack dashboard system for managing companies, jobs, contacts, applications, analytics, and structured workflows.",
-      foodsHubDesc: "Interactive social food-sharing application where users can post dishes, upload images, comment, engage with content, and explore food locations through an interactive experience.",
-      creatorverseDesc: "React + Supabase web platform for managing content creators with profile pages, editing tools, image support, and structured content management.",
+      tag: "Real-World Projects",
+      title: "Featured Software Engineering Projects",
+      desc: "Professional software solutions, SaaS platforms, and business systems built with modern full-stack technologies.",
+
+      logistikDesc:
+        "Enterprise logistics platform redesign with bilingual support, shipment tracking integration, responsive SaaS UI, and modern customer portal experience.",
+
+      serveflowDesc:
+        "Full-stack volunteer management platform for churches with JWT authentication, ministry scheduling, role-based access, and real-world operational workflows.",
+
+      cleanCareDesc:
+        "Modern business website focused on lead generation, multilingual support, responsive design, and premium service branding for a real cleaning company.",
+
       viewProject: "View Project",
       viewGithub: "View GitHub"
     },
@@ -63,6 +70,7 @@ export const translations = {
     },
     codingsoft: {
       title: "Need a Website, App, or Business System?",
+      subtitle: "Software Agency & SaaS Platform",
       desc1: "Through ",
       desc2: "CodingSoft",
       desc3: ", I help businesses turn ideas into real digital systems — from websites and booking platforms to dashboards, automation, payments, and scalable applications.",
@@ -134,12 +142,19 @@ export const translations = {
       workWithMe: "Trabaja Conmigo"
     },
     publicProjects: {
-      tag: "Código Abierto",
-      title: "Proyectos de Ingeniería Públicos",
-      desc: "Repositorios públicos de GitHub que demuestran mis habilidades técnicas y de código.",
-      jobTrackerDesc: "Sistema de panel de control full-stack para gestionar empresas, empleos, contactos, aplicaciones, análisis y flujos de trabajo estructurados.",
-      foodsHubDesc: "Aplicación interactiva y social para compartir comida donde los usuarios pueden publicar platos, subir imágenes, comentar, interactuar y explorar lugares de comida.",
-      creatorverseDesc: "Plataforma web React + Supabase para gestionar creadores de contenido con perfiles, herramientas de edición, imágenes y gestión estructurada.",
+      tag: "Proyectos Reales",
+      title: "Proyectos Destacados de Ingeniería de Software",
+      desc: "Soluciones profesionales de software, plataformas SaaS y sistemas empresariales desarrollados con tecnologías modernas full-stack.",
+
+      logistikDesc:
+        "Rediseño de plataforma logística empresarial con soporte bilingüe, integración de rastreo de envíos, interfaz SaaS responsive y experiencia moderna de portal para clientes.",
+
+      serveflowDesc:
+        "Plataforma full-stack de gestión de voluntarios para iglesias con autenticación JWT, programación de ministerios, control de acceso por roles y flujos operacionales reales.",
+
+      cleanCareDesc:
+        "Sitio web moderno enfocado en generación de clientes potenciales, soporte multilenguaje, diseño responsive y branding premium para una empresa real de limpieza.",
+
       viewProject: "Ver Proyecto",
       viewGithub: "Ver GitHub"
     },
@@ -171,6 +186,7 @@ export const translations = {
     },
     codingsoft: {
       title: "¿Necesitas un Sitio Web, App o Sistema de Negocios?",
+      subtitle: "Agencia de Software y Plataforma SaaS",
       desc1: "A través de ",
       desc2: "CodingSoft",
       desc3: ", ayudo a las empresas a convertir ideas en sistemas digitales reales — desde sitios web y plataformas de reservas hasta paneles, automatización, pagos y aplicaciones escalables.",

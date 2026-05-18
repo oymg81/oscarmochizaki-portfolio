@@ -160,11 +160,10 @@ export default function OscarMochizakiPortfolio() {
                 <button
                   onClick={handleLike}
                   disabled={liked}
-                  className={`rounded-full px-6 py-3 font-medium transition-all duration-300 flex items-center gap-2 ${
-                    liked
-                      ? "bg-pink-500/20 text-pink-300 border border-pink-400/30 cursor-not-allowed"
-                      : "bg-white/5 text-white border border-white/15 hover:bg-pink-500/20 hover:border-pink-400/40 hover:scale-105"
-                  }`}
+                  className={`rounded-full px-6 py-3 font-medium transition-all duration-300 flex items-center gap-2 ${liked
+                    ? "bg-pink-500/20 text-pink-300 border border-pink-400/30 cursor-not-allowed"
+                    : "bg-white/5 text-white border border-white/15 hover:bg-pink-500/20 hover:border-pink-400/40 hover:scale-105"
+                    }`}
                 >
                   ❤️ {liked ? "Liked" : "Like"} · {likes}
                 </button>
@@ -186,26 +185,25 @@ export default function OscarMochizakiPortfolio() {
             <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3 items-start">
               {[
                 {
-                  title: "Job Tracker",
-                  desc: t.publicProjects.jobTrackerDesc,
-                  tech: "Flask • MySQL • Dashboard • CRUD",
-                  cta: t.publicProjects.viewProject,
-                  github: "https://github.com/oymg81/job-tracker-app",
+                  title: "Logisti-K",
+                  desc: t.publicProjects.logistikDesc,
+                  tech: "Next.js • TailwindCSS • Framer Motion • next-intl • Vercel",
+                  github: "https://github.com/oymg81/cargoflow-platform",
+                  demo: "https://youtu.be/nJ9KgZaZEW0"
+                },
+                {
+                  title: "ServeFlow",
+                  desc: t.publicProjects.serveflowDesc,
+                  tech: "PostgreSQL • Express • React • Node.js • JWT",
+                  github: "https://github.com/oymg81/serveflow",
                   demo: "https://youtu.be/Bvz3lIjeNAc"
                 },
                 {
-                  title: "Foods Hub",
-                  desc: "Interactive social food-sharing application where users can create posts, upload food images, comment, and explore food content through a modern responsive UI.",
-                  tech: "React • JSON Server • Social App • Interactive UI",
-                  demo: "https://youtu.be/gYhQInnv-TM",
-                  github: "https://github.com/oymg81/foods-hub"
-                },
-                {
-                  title: "Creatorverse",
-                  desc: "A React + Supabase CRUD app for managing content creators with dedicated creator pages, responsive card layouts, image support, and full create/edit/delete functionality.",
-                  tech: "React • Supabase • CRUD • Web App",
-                  demo: "https://youtu.be/R8-3kdX9Pfw",
-                  github: "https://github.com/oymg81/creatorverse",
+                  title: "Clean & Care PRO",
+                  desc: t.publicProjects.cleanCareDesc,
+                  tech: "React • Vite • TailwindCSS • Framer Motion",
+                  github: "https://github.com/oymg81/karina-cleaning-website",
+                  demo: "https://youtu.be/4sdDUihZbvM"
                 }
               ].map((proj) => (
                 <div key={proj.title} className="rounded-[24px] border border-white/10 bg-[#0F1A34] p-6 transition hover:-translate-y-1 hover:border-[#4B84FF]/40 flex flex-col">
