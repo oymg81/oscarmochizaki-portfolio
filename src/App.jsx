@@ -10,6 +10,9 @@ export default function OscarMochizakiPortfolio() {
   const [showBubble, setShowBubble] = useState(false);
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
+  const [likesLoading, setLikesLoading] = useState(true);
+  const [likeSubmitting, setLikeSubmitting] = useState(false);
+  const [likeError, setLikeError] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -24,39 +27,58 @@ export default function OscarMochizakiPortfolio() {
 
   useEffect(() => {
     const fetchLikes = async () => {
-      const { count, error } = await supabase
-        .from("portfolio_likes")
-        .select("*", { count: "exact", head: true });
+      try {
+        setLikesLoading(true);
+        setLikeError("");
 
-      if (!error) {
+        const { count, error } = await supabase
+          .from("portfolio_likes")
+          .select("*", { count: "exact", head: true });
+
+        if (error) {
+          throw error;
+        }
+
         setLikes(count || 0);
-      } else {
+      } catch (error) {
         console.error("Error fetching likes:", error);
+        setLikeError("Likes are temporarily unavailable.");
+      } finally {
+        setLikesLoading(false);
       }
     };
 
     fetchLikes();
 
     const alreadyLiked = localStorage.getItem("portfolio_liked");
-
     if (alreadyLiked) {
       setLiked(true);
     }
   }, []);
 
   const handleLike = async () => {
-    if (liked) return;
+    if (liked || likeSubmitting) return;
 
-    const { error } = await supabase
-      .from("portfolio_likes")
-      .insert({});
+    try {
+      setLikeSubmitting(true);
+      setLikeError("");
 
-    if (!error) {
+      const { error } = await supabase
+        .from("portfolio_likes")
+        .insert({});
+
+      if (error) {
+        throw error;
+      }
+
       setLikes((prev) => prev + 1);
       setLiked(true);
       localStorage.setItem("portfolio_liked", "true");
-    } else {
+    } catch (error) {
       console.error("Error adding like:", error);
+      setLikeError("Could not add your like. Please try again later.");
+    } finally {
+      setLikeSubmitting(false);
     }
   };
 
@@ -158,15 +180,23 @@ export default function OscarMochizakiPortfolio() {
                   {t.hero.workWithMe}
                 </a>
                 <button
+                  type="button"
                   onClick={handleLike}
-                  disabled={liked}
-                  className={`rounded-full px-6 py-3 font-medium transition-all duration-300 flex items-center gap-2 ${liked
-                    ? "bg-pink-500/20 text-pink-300 border border-pink-400/30 cursor-not-allowed"
-                    : "bg-white/5 text-white border border-white/15 hover:bg-pink-500/20 hover:border-pink-400/40 hover:scale-105"
-                    }`}
+                  disabled={liked || likeSubmitting}
+                  aria-pressed={liked}
+                  className={`rounded-full px-6 py-3 font-medium transition-all duration-300 flex items-center gap-2 ${
+                    liked
+                      ? "bg-pink-500/20 text-pink-300 border border-pink-400/30 cursor-default"
+                      : "bg-white/5 text-white border border-white/15 hover:bg-pink-500/20 hover:border-pink-400/40 hover:scale-105"
+                  } ${likeSubmitting ? "opacity-70 cursor-wait" : ""}`}
                 >
-                  ❤️ {liked ? "Liked" : "Like"} · {likes}
+                  ❤️ {likeSubmitting ? "Liking..." : liked ? "Liked" : "Like"} · {likesLoading ? "..." : likes}
                 </button>
+                {likeError && (
+                  <p className="w-full text-sm text-pink-300 mt-2">
+                    {likeError}
+                  </p>
+                )}
               </div>
             </div>
 
