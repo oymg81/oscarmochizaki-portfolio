@@ -26,19 +26,26 @@ export const translations = {
       workWithMe: "Work With Me"
     },
     publicProjects: {
-      tag: "Real-World Projects",
-      title: "Featured Software Engineering Projects",
-      desc: "Professional software solutions, SaaS platforms, and business systems built with modern full-stack technologies.",
+      tag: "Production Software",
+      title: "Production Software & Client Projects",
+      desc: "SaaS products, business platforms, and production websites designed, engineered, and deployed for real-world use.",
+
+      foesDesc:
+        "Multi-tenant SaaS business platform built to centralize customer operations through modular tools for leads, reviews, promotions, tracking, billing, and automation.",
+
+      codingsoftDesc:
+        "Software development business and digital platform showcasing production websites, business systems, automation, integrations, and SaaS solutions built for real-world clients.",
 
       logistikDesc:
-        "Enterprise logistics platform redesign with bilingual support, shipment tracking integration, responsive SaaS UI, and modern customer portal experience.",
-
-      serveflowDesc:
-        "Full-stack volunteer management platform for churches with JWT authentication, ministry scheduling, role-based access, and real-world operational workflows.",
+        "Production logistics platform with bilingual support, shipment tracking integration, quote workflows, customer-facing tools, and modern responsive architecture.",
 
       cleanCareDesc:
-        "Modern business website focused on lead generation, multilingual support, responsive design, and premium service branding for a real cleaning company.",
+        "Production website built for a California cleaning business, featuring bilingual UX, lead-generation workflows, WhatsApp integration, responsive design, and local SEO optimization.",
 
+      viewPlatform: "View Platform",
+      visitCodingsoft: "Visit CodingSoft",
+      viewLiveSite: "View Live Site",
+      watchDemo: "Watch Demo",
       viewProject: "View Project",
       viewGithub: "View GitHub"
     },
@@ -53,20 +60,6 @@ export const translations = {
       ecommerce: "E-commerce Platforms",
       automation: "Automation Tools",
       custom: "Custom Web Applications"
-    },
-    projects: {
-      tag: "Projects",
-      title: "Projects & Business Solutions",
-      desc: "A mix of engineering projects, product concepts, and business-focused systems designed to solve real-world problems.",
-      productConcept: "Product Concept",
-      privateSystem: "Private Client System",
-      bodaGiftDesc: "Modern event gifting platform concept focused on personalized event pages, guest experiences, scalable architecture, and clean product UX.",
-      mypoboxDesc: "Business logistics workflow platform designed to streamline customer registration, shipments, payments, API integrations, and operational automation.",
-      viewConcept: "View Concept",
-      viewSystem: "View System Overview",
-      bodaModalDesc: "BodaGift is a product concept focused on personalized event pages and guest experiences. This project explores scalable architecture and a refined user interface.",
-      mypoboxModalDesc: "MyPobox is a private client system managing business logistics. It handles customer registration, shipment tracking, and automated payments via Stripe API integrations.",
-      close: "Close"
     },
     codingsoft: {
       title: "Need a Website, App, or Business System?",
@@ -142,19 +135,26 @@ export const translations = {
       workWithMe: "Trabaja Conmigo"
     },
     publicProjects: {
-      tag: "Proyectos Reales",
-      title: "Proyectos Destacados de Ingeniería de Software",
-      desc: "Soluciones profesionales de software, plataformas SaaS y sistemas empresariales desarrollados con tecnologías modernas full-stack.",
+      tag: "Software de Producción",
+      title: "Production Software & Client Projects",
+      desc: "Productos SaaS, plataformas empresariales y sitios web en producción diseñados, construidos y desplegados para uso en el mundo real.",
+
+      foesDesc:
+        "Plataforma SaaS multitenant para centralizar operaciones de clientes mediante herramientas modulares de prospectos, reseñas, promociones, seguimiento, facturación y automatización.",
+
+      codingsoftDesc:
+        "Plataforma digital y empresa de desarrollo de software que muestra sitios web en producción, sistemas empresariales, automatización, integraciones y soluciones SaaS desarrolladas para clientes reales.",
 
       logistikDesc:
-        "Rediseño de plataforma logística empresarial con soporte bilingüe, integración de rastreo de envíos, interfaz SaaS responsive y experiencia moderna de portal para clientes.",
-
-      serveflowDesc:
-        "Plataforma full-stack de gestión de voluntarios para iglesias con autenticación JWT, programación de ministerios, control de acceso por roles y flujos operacionales reales.",
+        "Plataforma logística en producción con soporte bilingüe, integración de rastreo de envíos, flujos de cotización, herramientas para clientes y arquitectura responsive moderna.",
 
       cleanCareDesc:
-        "Sitio web moderno enfocado en generación de clientes potenciales, soporte multilenguaje, diseño responsive y branding premium para una empresa real de limpieza.",
+        "Sitio web en producción construido para una empresa de limpieza en California, con UX bilingüe, flujos de generación de prospectos, integración con WhatsApp, diseño responsive y optimización SEO local.",
 
+      viewPlatform: "Ver Plataforma",
+      visitCodingsoft: "Visitar CodingSoft",
+      viewLiveSite: "Ver Sitio en Vivo",
+      watchDemo: "Ver Demo",
       viewProject: "Ver Proyecto",
       viewGithub: "Ver GitHub"
     },
@@ -169,20 +169,6 @@ export const translations = {
       ecommerce: "Plataformas de E-commerce",
       automation: "Herramientas de Automatización",
       custom: "Aplicaciones Web Personalizadas"
-    },
-    projects: {
-      tag: "Proyectos",
-      title: "Proyectos y Soluciones de Negocios",
-      desc: "Una mezcla de proyectos de ingeniería, conceptos de producto y sistemas enfocados en resolver problemas del mundo real.",
-      productConcept: "Concepto de Producto",
-      privateSystem: "Sistema Privado de Cliente",
-      bodaGiftDesc: "Concepto moderno de plataforma para regalos de eventos enfocado en páginas personalizadas, experiencia de invitados, arquitectura escalable y UX limpio.",
-      mypoboxDesc: "Plataforma logística diseñada para optimizar registros de clientes, envíos, pagos, integraciones de API y automatización operativa.",
-      viewConcept: "Ver Concepto",
-      viewSystem: "Ver Vista General del Sistema",
-      bodaModalDesc: "BodaGift es un concepto de producto enfocado en páginas de eventos personalizadas y experiencias de invitados. Este proyecto explora una arquitectura escalable y una interfaz de usuario refinada.",
-      mypoboxModalDesc: "MyPobox es un sistema privado que gestiona la logística empresarial. Maneja registros, seguimiento de envíos y pagos automatizados a través de la integración con la API de Stripe.",
-      close: "Cerrar"
     },
     codingsoft: {
       title: "¿Necesitas un Sitio Web, App o Sistema de Negocios?",

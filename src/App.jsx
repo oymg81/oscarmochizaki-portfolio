@@ -6,7 +6,6 @@ import { supabase } from "./supabaseClient";
 export default function OscarMochizakiPortfolio() {
   const [lang, setLang] = useState('en');
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
   const [showBubble, setShowBubble] = useState(false);
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
@@ -83,7 +82,6 @@ export default function OscarMochizakiPortfolio() {
   };
 
   const t = translations[lang];
-  const closeModal = () => setModalContent(null);
   const whatsappLink = "https://wa.me/message/BOB3EMBT3RKRO1";
 
   return (
@@ -150,7 +148,6 @@ export default function OscarMochizakiPortfolio() {
             <a href="#overview" className="block rounded-full bg-[#4B84FF] px-4 py-3 font-medium text-white transition hover:bg-[#3A6CE6]">{t.sidebar.overview}</a>
             <a href="#public-projects" className="block rounded-full px-4 py-3 text-slate-300 transition hover:bg-white/5 hover:text-white">{t.sidebar.publicProjects}</a>
             <a href="#solutions" className="block rounded-full px-4 py-3 text-slate-300 transition hover:bg-white/5 hover:text-white">{t.nav.solutions}</a>
-            <a href="#projects" className="block rounded-full px-4 py-3 text-slate-300 transition hover:bg-white/5 hover:text-white">{t.nav.projects}</a>
             <a href="#about" className="block rounded-full px-4 py-3 text-slate-300 transition hover:bg-white/5 hover:text-white">{t.sidebar.aboutMe}</a>
           </div>
         </aside>
@@ -212,45 +209,67 @@ export default function OscarMochizakiPortfolio() {
             <h2 className="mt-2 text-3xl font-bold">{t.publicProjects.title}</h2>
             <p className="mt-2 text-slate-300">{t.publicProjects.desc}</p>
 
-            <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3 items-start">
+            <div className="mt-8 grid gap-6 md:grid-cols-2 items-start">
               {[
+                {
+                  title: "FOES Platform",
+                  desc: t.publicProjects.foesDesc,
+                  tech: "Next.js • TypeScript • Supabase • PostgreSQL • Stripe • Resend • Vercel",
+                  ctaLabel: t.publicProjects.viewPlatform,
+                  link: "https://foes-landing.vercel.app/"
+                },
+                {
+                  title: "CodingSoft Technology",
+                  desc: t.publicProjects.codingsoftDesc,
+                  tech: "Web Development • Automation • API Integrations • SaaS Solutions",
+                  ctaLabel: t.publicProjects.visitCodingsoft,
+                  link: "https://codingsoft.tech"
+                },
                 {
                   title: "Logisti-K",
                   desc: t.publicProjects.logistikDesc,
-                  tech: "Next.js • TailwindCSS • Framer Motion • next-intl • Vercel",
-                  github: "https://github.com/oymg81/cargoflow-platform",
+                  tech: "Next.js • TypeScript • Tailwind CSS • Supabase • next-intl • Vercel",
+                  ctaLabel: t.publicProjects.viewLiveSite,
+                  link: "https://logisti-k.us",
                   demo: "https://youtu.be/nJ9KgZaZEW0"
-                },
-                {
-                  title: "ServeFlow",
-                  desc: t.publicProjects.serveflowDesc,
-                  tech: "PostgreSQL • Express • React • Node.js • JWT",
-                  github: "https://github.com/oymg81/serveflow",
-                  demo: "https://youtu.be/Bvz3lIjeNAc"
                 },
                 {
                   title: "Clean & Care PRO",
                   desc: t.publicProjects.cleanCareDesc,
-                  tech: "React • Vite • TailwindCSS • Framer Motion",
-                  github: "https://github.com/oymg81/karina-cleaning-website",
+                  tech: "React • Vite • Tailwind CSS • EmailJS • Framer Motion",
+                  ctaLabel: t.publicProjects.viewLiveSite,
+                  link: "https://cleancareproservice.com",
                   demo: "https://youtu.be/4sdDUihZbvM"
                 }
               ].map((proj) => (
-                <div key={proj.title} className="rounded-[24px] border border-white/10 bg-[#0F1A34] p-6 transition hover:-translate-y-1 hover:border-[#4B84FF]/40 flex flex-col">
+                <div key={proj.title} className="rounded-[24px] border border-white/10 bg-[#0F1A34] p-6 transition hover:-translate-y-1 hover:border-[#4B84FF]/40 flex flex-col justify-between h-full">
                   <div>
                     <h3 className="text-lg font-bold">{proj.title}</h3>
                     <p className="mt-3 text-sm leading-6 text-slate-300">{proj.desc}</p>
                     <div className="mt-4 text-xs font-semibold text-[#8CB2FF]">{proj.tech}</div>
                   </div>
-                  <div className="flex gap-3 mt-6">
+                  <div className="flex flex-wrap gap-2.5 mt-6">
+                    {proj.link && (
+                      <a
+                        href={proj.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${proj.ctaLabel} - ${proj.title}`}
+                        className="flex-1 min-w-[120px] text-center rounded-full bg-[#4B84FF] py-2 px-4 text-sm font-medium text-white transition hover:bg-[#3A6CE6]"
+                      >
+                        {proj.ctaLabel}
+                      </a>
+                    )}
+
                     {proj.demo && (
                       <a
                         href={proj.demo}
                         target="_blank"
-                        rel="noreferrer"
-                        className="flex-1 text-center rounded-full bg-[#4B84FF] py-2 text-sm text-white transition hover:bg-[#3A6CE6]"
+                        rel="noopener noreferrer"
+                        aria-label={`Watch Demo video for ${proj.title}`}
+                        className="flex-1 min-w-[120px] text-center rounded-full border border-white/15 bg-white/5 py-2 px-4 text-sm font-medium text-white transition hover:bg-white/10"
                       >
-                        Watch Demo
+                        {t.publicProjects.watchDemo}
                       </a>
                     )}
 
@@ -258,10 +277,11 @@ export default function OscarMochizakiPortfolio() {
                       <a
                         href={proj.github}
                         target="_blank"
-                        rel="noreferrer"
-                        className="flex-1 text-center rounded-full border border-[#4B84FF]/30 bg-[#4B84FF]/10 py-2 text-sm text-[#A9C4FF] transition hover:bg-[#4B84FF]/20"
+                        rel="noopener noreferrer"
+                        aria-label={`View GitHub repository for ${proj.title}`}
+                        className="flex-1 min-w-[100px] text-center rounded-full border border-[#4B84FF]/30 bg-[#4B84FF]/10 py-2 px-4 text-sm font-medium text-[#A9C4FF] transition hover:bg-[#4B84FF]/20"
                       >
-                        GitHub
+                        {t.publicProjects.viewGithub}
                       </a>
                     )}
                   </div>
@@ -294,52 +314,7 @@ export default function OscarMochizakiPortfolio() {
             </div>
           </section>
 
-          {/* 4. Projects & Business Solutions */}
-          <section id="projects" className="rounded-[28px] border border-white/10 bg-white/5 p-8 lg:p-10 backdrop-blur-xl">
-            <div className="text-sm uppercase tracking-[0.2em] text-[#8CB2FF]">{t.projects.tag}</div>
-            <h2 className="mt-2 text-3xl font-bold">{t.projects.title}</h2>
-            <p className="mt-2 text-slate-300">{t.projects.desc}</p>
-
-            <div className="mt-8 grid gap-6 md:grid-cols-2 items-start">
-              {/* BodaGift */}
-              <div className="rounded-[24px] border border-white/10 bg-[#0D1529] p-7 transition hover:-translate-y-1 hover:border-[#4B84FF]/40 flex flex-col">
-                <div>
-                  <div className="text-xs uppercase font-semibold text-[#8CB2FF] mb-2">{t.projects.productConcept}</div>
-                  <h3 className="text-xl font-bold">BodaGift</h3>
-                  <p className="mt-3 text-sm leading-6 text-slate-300">
-                    {t.projects.bodaGiftDesc}
-                  </p>
-                  <div className="mt-4 text-sm text-[#8CB2FF]">React • Supabase • UI/UX • {t.projects.productConcept}</div>
-                </div>
-                <button
-                  onClick={() => setModalContent({ title: 'BodaGift', desc: t.projects.bodaModalDesc, type: t.projects.productConcept })}
-                  className="mt-6 w-full rounded-full border border-white/10 bg-white/5 py-2 text-sm text-white transition hover:bg-white/10"
-                >
-                  {t.projects.viewConcept}
-                </button>
-              </div>
-
-              {/* MyPobox */}
-              <div className="rounded-[24px] border border-white/10 bg-[#0D1529] p-7 transition hover:-translate-y-1 hover:border-[#4B84FF]/40 flex flex-col">
-                <div>
-                  <div className="text-xs uppercase font-semibold text-[#4B84FF] mb-2">{t.projects.privateSystem}</div>
-                  <h3 className="text-xl font-bold">MyPobox</h3>
-                  <p className="mt-3 text-sm leading-6 text-slate-300">
-                    {t.projects.mypoboxDesc}
-                  </p>
-                  <div className="mt-4 text-sm text-[#8CB2FF]">WordPress • PHP • APIs • Stripe • Business System</div>
-                </div>
-                <button
-                  onClick={() => setModalContent({ title: 'MyPobox', desc: t.projects.mypoboxModalDesc, type: t.projects.privateSystem })}
-                  className="mt-6 w-full rounded-full border border-white/10 bg-white/5 py-2 text-sm text-white transition hover:bg-white/10"
-                >
-                  {t.projects.viewSystem}
-                </button>
-              </div>
-            </div>
-          </section>
-
-          {/* 5. CodingSoft Funnel */}
+          {/* 4. CodingSoft Funnel */}
           <section className="rounded-[32px] border border-[#4B84FF]/20 bg-gradient-to-r from-[#0D1830] to-[#142A5E] py-8 px-6 shadow-2xl text-center relative overflow-hidden">
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-[#4B84FF] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-[#7FAAFF] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -358,7 +333,7 @@ export default function OscarMochizakiPortfolio() {
             </div>
           </section>
 
-          {/* 6. About Me / Founder Section */}
+          {/* 5. About Me / Founder Section */}
           <section id="about" className="grid gap-6 lg:grid-cols-[1.5fr_1fr] items-start">
             <div className="rounded-[28px] border border-white/10 bg-white/5 p-8 lg:p-10 backdrop-blur-xl">
               <div className="mb-3 text-sm uppercase tracking-[0.2em] text-[#8CB2FF]">{t.about.tag}</div>
@@ -398,7 +373,7 @@ export default function OscarMochizakiPortfolio() {
             </div>
           </section>
 
-          {/* 7. Contact */}
+          {/* 6. Contact */}
           <footer id="contact" className="rounded-[28px] border border-white/10 bg-gradient-to-r from-[#0B1428] to-[#11224A] p-6">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div>
@@ -415,22 +390,6 @@ export default function OscarMochizakiPortfolio() {
 
         </section>
       </main>
-
-      {/* Modals */}
-      {modalContent && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="w-full max-w-lg rounded-2xl border border-white/10 bg-[#0D1529] p-8 shadow-2xl relative">
-            <button onClick={closeModal} className="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">&times;</button>
-            <div className="text-xs uppercase font-semibold text-[#8CB2FF] mb-2">{modalContent.type}</div>
-            <h3 className="text-2xl font-bold mb-4">{modalContent.title}</h3>
-            <p className="text-slate-300 leading-relaxed mb-6">{modalContent.desc}</p>
-            <div className="h-40 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-500 italic text-sm mb-6">
-              [ Case Study / Visual Mockup Area ]
-            </div>
-            <button onClick={closeModal} className="w-full rounded-full bg-[#4B84FF] py-3 text-white font-medium hover:bg-[#3A6CE6] transition">{t.projects.close}</button>
-          </div>
-        </div>
-      )}
 
       {/* Floating Elements */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4 items-end">
