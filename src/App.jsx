@@ -216,7 +216,7 @@ export default function OscarMochizakiPortfolio() {
                   desc: t.publicProjects.foesDesc,
                   tech: "Next.js • TypeScript • Supabase • PostgreSQL • Stripe • Resend • Vercel",
                   ctaLabel: t.publicProjects.viewPlatform,
-                  link: "https://foes-landing.vercel.app/"
+                  link: "https://foes.pro"
                 },
                 {
                   title: "CodingSoft Technology",
