@@ -52,11 +52,15 @@ export const translations = {
       logistikDesc:
         "Production logistics platform with bilingual support, shipment tracking integration, quote workflows, customer-facing tools, and modern responsive architecture.",
 
+      boundlessDesc:
+        "Production bilingual church website built with Next.js, featuring English/Spanish content, event experiences, Plan Your Visit integration, responsive mobile-first design, SEO, and production deployment.",
+
       cleanCareDesc:
         "Production website built for a California cleaning business, featuring bilingual UX, lead-generation workflows, WhatsApp integration, responsive design, and local SEO optimization.",
 
       viewPlatform: "View Platform",
       visitCodingsoft: "Visit CodingSoft",
+      visitWebsite: "Visit Website",
       viewLiveSite: "View Live Site",
       watchDemo: "Watch Demo",
       viewProject: "View Project",
@@ -174,11 +178,15 @@ export const translations = {
       logistikDesc:
         "Plataforma logística en producción con soporte bilingüe, integración de rastreo de envíos, flujos de cotización, herramientas para clientes y arquitectura responsive moderna.",
 
+      boundlessDesc:
+        "Sitio web eclesial bilingüe en producción construido con Next.js, con contenido en inglés/español, experiencia de eventos, integración de Planifica tu Visita, diseño responsive enfocado en móviles, SEO y despliegue en producción.",
+
       cleanCareDesc:
         "Sitio web en producción construido para una empresa de limpieza en California, con UX bilingüe, flujos de generación de prospectos, integración con WhatsApp, diseño responsive y optimización SEO local.",
 
       viewPlatform: "Ver Plataforma",
       visitCodingsoft: "Visitar CodingSoft",
+      visitWebsite: "Visitar Sitio Web",
       viewLiveSite: "Ver Sitio en Vivo",
       watchDemo: "Ver Demo",
       viewProject: "Ver Proyecto",

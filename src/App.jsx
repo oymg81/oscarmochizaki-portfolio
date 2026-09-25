@@ -1,17 +1,11 @@
 import { useState, useEffect } from 'react';
 import Yo1 from './assets/Yo1.png';
 import { translations } from './translations';
-import { supabase } from "./supabaseClient";
 
 export default function OscarMochizakiPortfolio() {
   const [lang, setLang] = useState('en');
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
-  const [likes, setLikes] = useState(0);
-  const [liked, setLiked] = useState(false);
-  const [likesLoading, setLikesLoading] = useState(true);
-  const [likeSubmitting, setLikeSubmitting] = useState(false);
-  const [likeError, setLikeError] = useState("");
   const [isConnectPage, setIsConnectPage] = useState(
     typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('/connect')
   );
@@ -26,71 +20,18 @@ export default function OscarMochizakiPortfolio() {
   }, []);
 
   useEffect(() => {
-    if (isChatOpen) {
-      setShowBubble(false);
-      return;
-    }
+    if (isChatOpen) return;
     const timer = setTimeout(() => {
       setShowBubble(true);
     }, 2000);
     return () => clearTimeout(timer);
   }, [isChatOpen]);
 
-  useEffect(() => {
-    const fetchLikes = async () => {
-      try {
-        setLikesLoading(true);
-        setLikeError("");
-
-        const { count, error } = await supabase
-          .from("portfolio_likes")
-          .select("*", { count: "exact", head: true });
-
-        if (error) {
-          throw error;
-        }
-
-        setLikes(count || 0);
-      } catch (error) {
-        console.error("Error fetching likes:", error);
-        setLikeError("Likes are temporarily unavailable.");
-      } finally {
-        setLikesLoading(false);
-      }
-    };
-
-    fetchLikes();
-
-    const alreadyLiked = localStorage.getItem("portfolio_liked");
-    if (alreadyLiked) {
-      setLiked(true);
-    }
-  }, []);
-
-  const handleLike = async () => {
-    if (liked || likeSubmitting) return;
-
-    try {
-      setLikeSubmitting(true);
-      setLikeError("");
-
-      const { error } = await supabase
-        .from("portfolio_likes")
-        .insert({});
-
-      if (error) {
-        throw error;
-      }
-
-      setLikes((prev) => prev + 1);
-      setLiked(true);
-      localStorage.setItem("portfolio_liked", "true");
-    } catch (error) {
-      console.error("Error adding like:", error);
-      setLikeError("Could not add your like. Please try again later.");
-    } finally {
-      setLikeSubmitting(false);
-    }
+  const toggleChat = () => {
+    setIsChatOpen((prev) => {
+      if (!prev) setShowBubble(false);
+      return !prev;
+    });
   };
 
   const t = translations[lang];
@@ -278,24 +219,6 @@ export default function OscarMochizakiPortfolio() {
                 <a href={whatsappLink} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">
                   {t.hero.workWithMe}
                 </a>
-                <button
-                  type="button"
-                  onClick={handleLike}
-                  disabled={liked || likeSubmitting}
-                  aria-pressed={liked}
-                  className={`rounded-full px-6 py-3 font-medium transition-all duration-300 flex items-center gap-2 ${
-                    liked
-                      ? "bg-pink-500/20 text-pink-300 border border-pink-400/30 cursor-default"
-                      : "bg-white/5 text-white border border-white/15 hover:bg-pink-500/20 hover:border-pink-400/40 hover:scale-105"
-                  } ${likeSubmitting ? "opacity-70 cursor-wait" : ""}`}
-                >
-                  ❤️ {likeSubmitting ? "Liking..." : liked ? "Liked" : "Like"} · {likesLoading ? "..." : likes}
-                </button>
-                {likeError && (
-                  <p className="w-full text-sm text-pink-300 mt-2">
-                    {likeError}
-                  </p>
-                )}
               </div>
             </div>
 
@@ -326,6 +249,13 @@ export default function OscarMochizakiPortfolio() {
                   tech: "Web Development • Automation • API Integrations • SaaS Solutions",
                   ctaLabel: t.publicProjects.visitCodingsoft,
                   link: "https://codingsoft.tech"
+                },
+                {
+                  title: "Boundless Church",
+                  desc: t.publicProjects.boundlessDesc,
+                  tech: "Next.js • TypeScript • Vercel • Bilingual EN/ES • SEO • CCB Integration",
+                  ctaLabel: t.publicProjects.visitWebsite,
+                  link: "https://boundlesschurch.com"
                 },
                 {
                   title: "Logisti-K",
@@ -524,7 +454,7 @@ export default function OscarMochizakiPortfolio() {
                 </div>
                 <div className="font-semibold text-sm">{t.chat.aiName}</div>
               </div>
-              <button onClick={() => setIsChatOpen(false)} className="text-slate-300 hover:text-white">&times;</button>
+              <button onClick={toggleChat} className="text-slate-300 hover:text-white">&times;</button>
             </div>
 
             <div className="p-4 max-h-[400px] overflow-y-auto flex flex-col gap-3">
@@ -569,7 +499,7 @@ export default function OscarMochizakiPortfolio() {
         </div>
 
         {/* Chatbot Toggle Button */}
-        <button onClick={() => setIsChatOpen(!isChatOpen)} className="w-14 h-14 bg-[#4B84FF] rounded-full flex items-center justify-center shadow-lg shadow-[#0047AB]/40 hover:scale-110 transition text-white backdrop-blur-md border border-white/20">
+        <button onClick={toggleChat} className="w-14 h-14 bg-[#4B84FF] rounded-full flex items-center justify-center shadow-lg shadow-[#0047AB]/40 hover:scale-110 transition text-white backdrop-blur-md border border-white/20">
           {isChatOpen ? (
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           ) : (
