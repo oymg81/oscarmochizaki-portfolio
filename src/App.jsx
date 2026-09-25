@@ -94,7 +94,7 @@ export default function OscarMochizakiPortfolio() {
   };
 
   const t = translations[lang];
-  const resumeLink = "/resume/Oscar-Mochizaki-Resume.pdf";
+  const resumeLink = "/resume/OMochizaki.pdf";
   const linkedinLink = "https://www.linkedin.com/in/oscarmochizaki/";
   const githubLink = "https://github.com/oymg81";
   const emailLink = "mailto:oscar@codingsoft.tech";
