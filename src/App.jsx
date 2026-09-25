@@ -12,16 +12,28 @@ export default function OscarMochizakiPortfolio() {
   const [likesLoading, setLikesLoading] = useState(true);
   const [likeSubmitting, setLikeSubmitting] = useState(false);
   const [likeError, setLikeError] = useState("");
+  const [isConnectPage, setIsConnectPage] = useState(
+    typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('/connect')
+  );
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!isChatOpen) setShowBubble(true);
-    }, 2000);
-    return () => clearTimeout(timer);
+    const checkRoute = () => {
+      setIsConnectPage(window.location.pathname.toLowerCase().includes('/connect'));
+    };
+    checkRoute();
+    window.addEventListener('popstate', checkRoute);
+    return () => window.removeEventListener('popstate', checkRoute);
   }, []);
 
   useEffect(() => {
-    if (isChatOpen) setShowBubble(false);
+    if (isChatOpen) {
+      setShowBubble(false);
+      return;
+    }
+    const timer = setTimeout(() => {
+      setShowBubble(true);
+    }, 2000);
+    return () => clearTimeout(timer);
   }, [isChatOpen]);
 
   useEffect(() => {
@@ -82,6 +94,10 @@ export default function OscarMochizakiPortfolio() {
   };
 
   const t = translations[lang];
+  const resumeLink = "/resume/Oscar-Mochizaki-Resume.pdf";
+  const linkedinLink = "https://www.linkedin.com/in/oscarmochizaki/";
+  const githubLink = "https://github.com/oymg81";
+  const emailLink = "mailto:oscar@codingsoft.tech";
   const whatsappLink = "https://wa.me/message/BOB3EMBT3RKRO1";
 
   return (
@@ -94,8 +110,13 @@ export default function OscarMochizakiPortfolio() {
 
       {/* Header */}
       <header className="relative z-10 mx-auto flex max-w-[1500px] items-center justify-between px-6 py-6 lg:px-10">
-        <div className="text-2xl font-bold tracking-tight">Oscar Mochizaki</div>
+        <a href="/" className="text-2xl font-bold tracking-tight text-white hover:text-[#8CB2FF] transition">
+          Oscar Mochizaki
+        </a>
         <nav className="hidden items-center gap-8 text-sm text-slate-300 md:flex">
+          <a href={resumeLink} target="_blank" rel="noreferrer" className="transition font-semibold text-[#8CB2FF] hover:text-white flex items-center gap-1">
+            <span>📄</span> {t.hero.viewResume}
+          </a>
           <a href="#about" className="transition hover:text-white">{t.nav.about}</a>
           <a href="#public-projects" className="transition hover:text-white">{t.nav.projects}</a>
           <a href="#solutions" className="transition hover:text-white">{t.nav.solutions}</a>
@@ -145,6 +166,9 @@ export default function OscarMochizakiPortfolio() {
             </p>
           </div>
           <div className="space-y-2 text-sm">
+            <a href={resumeLink} target="_blank" rel="noreferrer" className="block text-center rounded-full border border-[#4B84FF]/40 bg-[#4B84FF]/20 px-4 py-3 font-semibold text-[#A9C4FF] transition hover:bg-[#4B84FF] hover:text-white">
+              📄 {t.hero.viewResume}
+            </a>
             <a href="#overview" className="block rounded-full bg-[#4B84FF] px-4 py-3 font-medium text-white transition hover:bg-[#3A6CE6]">{t.sidebar.overview}</a>
             <a href="#public-projects" className="block rounded-full px-4 py-3 text-slate-300 transition hover:bg-white/5 hover:text-white">{t.sidebar.publicProjects}</a>
             <a href="#solutions" className="block rounded-full px-4 py-3 text-slate-300 transition hover:bg-white/5 hover:text-white">{t.nav.solutions}</a>
@@ -154,6 +178,76 @@ export default function OscarMochizakiPortfolio() {
 
         {/* Content */}
         <section className="space-y-6">
+
+          {/* Recruiter / NFC Card Banner (Highlighted when accessed via /connect) */}
+          {isConnectPage && (
+            <section id="connect-card" className="rounded-[32px] border-2 border-[#4B84FF] bg-gradient-to-br from-[#0B1736] via-[#10234E] to-[#0A142E] p-6 sm:p-8 shadow-2xl shadow-[#0047AB]/40 animate-fade-in">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+                <div className="w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-full border-4 border-[#4B84FF] shadow-xl overflow-hidden bg-[#0A1630]">
+                  <img src={Yo1} alt="Oscar Mochizaki" className="w-full h-full object-cover object-top" />
+                </div>
+
+                <div className="flex-1 text-center md:text-left">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-[#4B84FF]/40 bg-[#4B84FF]/20 px-3.5 py-1 text-xs font-semibold tracking-wide text-[#A9C4FF] mb-3">
+                    <span className="h-2 w-2 rounded-full bg-[#4B84FF] animate-ping" />
+                    {t.recruiter.tag}
+                  </div>
+                  <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    {t.recruiter.title}
+                  </h1>
+                  <p className="text-lg font-semibold text-[#8CB2FF] mt-1">
+                    {t.recruiter.role}
+                  </p>
+                  <p className="text-xs text-slate-400 font-medium">
+                    {t.recruiter.subrole}
+                  </p>
+                  <p className="mt-3 text-sm text-slate-300 leading-relaxed max-w-2xl">
+                    {t.recruiter.desc}
+                  </p>
+
+                  {/* Primary Recruiter Action Hierarchy */}
+                  <div className="mt-6 flex flex-wrap items-center gap-3 justify-center md:justify-start">
+                    <a
+                      href={resumeLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full bg-[#4B84FF] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-[#0047AB]/40 transition hover:scale-105 hover:bg-[#3A6CE6] flex items-center gap-2"
+                    >
+                      📄 {t.recruiter.viewResume}
+                    </a>
+                    <a
+                      href={linkedinLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/20 flex items-center gap-2"
+                    >
+                      💼 {t.recruiter.linkedin}
+                    </a>
+                    <a
+                      href={githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/20 flex items-center gap-2"
+                    >
+                      💻 {t.recruiter.github}
+                    </a>
+                    <a
+                      href="#public-projects"
+                      className="rounded-full border border-[#4B84FF]/40 bg-[#4B84FF]/10 px-5 py-3 text-sm font-medium text-[#A9C4FF] transition hover:bg-[#4B84FF]/20 flex items-center gap-2"
+                    >
+                      🌐 {t.recruiter.viewProjects}
+                    </a>
+                    <a
+                      href={emailLink}
+                      className="rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/20 flex items-center gap-2"
+                    >
+                      ✉️ {t.recruiter.email}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
 
           {/* 1. Hero Section */}
           <section id="overview" className="rounded-[32px] border border-white/10 bg-gradient-to-br from-[#091225] via-[#0A1630] to-[#0E1530] px-8 py-8 shadow-2xl shadow-black/20 flex flex-col md:flex-row gap-6 items-center md:items-start justify-between">
@@ -170,7 +264,15 @@ export default function OscarMochizakiPortfolio() {
                 {t.hero.desc}
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <a href="#solutions" className="rounded-full bg-[#4B84FF] px-6 py-3 font-medium text-white shadow-lg shadow-[#0047AB]/30 transition hover:scale-[1.02] hover:bg-[#3A6CE6]">
+                <a
+                  href={resumeLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-[#4B84FF] px-6 py-3 font-medium text-white shadow-lg shadow-[#0047AB]/30 transition hover:scale-[1.02] hover:bg-[#3A6CE6] flex items-center gap-2"
+                >
+                  📄 {t.hero.viewResume}
+                </a>
+                <a href="#solutions" className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">
                   {t.hero.viewSolutions}
                 </a>
                 <a href={whatsappLink} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">
@@ -381,9 +483,12 @@ export default function OscarMochizakiPortfolio() {
                 <h2 className="text-3xl font-bold">{t.contact.title}</h2>
               </div>
               <div className="flex flex-wrap gap-4 md:justify-end">
-                <a href="mailto:oymg81@gmail.com" className="rounded-full bg-[#4B84FF] px-6 py-3 font-medium text-white shadow-lg shadow-[#0047AB]/30 transition hover:scale-[1.02] hover:bg-[#3A6CE6]">{t.contact.email}</a>
-                <a href="https://github.com/oymg81" target="_blank" rel="noreferrer" className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">{t.contact.github}</a>
-                <a href="https://www.linkedin.com/in/oscar-mochizaki20" target="_blank" rel="noreferrer" className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">{t.contact.linkedin}</a>
+                <a href={resumeLink} target="_blank" rel="noreferrer" className="rounded-full bg-[#4B84FF] px-6 py-3 font-medium text-white shadow-lg shadow-[#0047AB]/30 transition hover:scale-[1.02] hover:bg-[#3A6CE6]">
+                  📄 {t.hero.viewResume}
+                </a>
+                <a href={emailLink} className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">{t.contact.email}</a>
+                <a href={githubLink} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">{t.contact.github}</a>
+                <a href={linkedinLink} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">{t.contact.linkedin}</a>
               </div>
             </div>
           </footer>

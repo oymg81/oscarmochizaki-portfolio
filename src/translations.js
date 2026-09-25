@@ -23,7 +23,20 @@ export const translations = {
       title4: "Web Applications",
       desc: "I design and build websites, booking platforms, dashboards, automation tools, and custom software for restaurants, spas, academies, churches, startups, and growing businesses.",
       viewSolutions: "View Solutions",
-      workWithMe: "Work With Me"
+      workWithMe: "Work With Me",
+      viewResume: "View Resume"
+    },
+    recruiter: {
+      tag: "Professional NFC Card",
+      title: "Oscar Mochizaki",
+      role: "Software Engineer",
+      subrole: "Founder & Software Engineer — CodingSoft Technology",
+      desc: "Full-Stack Software Engineer building scalable business systems, web applications, and automation tools.",
+      viewResume: "View Resume (PDF)",
+      linkedin: "LinkedIn",
+      github: "GitHub",
+      viewProjects: "View Portfolio",
+      email: "Email Oscar"
     },
     publicProjects: {
       tag: "Production Software",
@@ -132,7 +145,20 @@ export const translations = {
       title4: "Aplicaciones Web",
       desc: "Diseño y construyo sitios web, plataformas de reservas, paneles de control, herramientas de automatización y software personalizado para restaurantes, spas, academias, iglesias, startups y empresas en crecimiento.",
       viewSolutions: "Ver Soluciones",
-      workWithMe: "Trabaja Conmigo"
+      workWithMe: "Trabaja Conmigo",
+      viewResume: "Ver Currículum"
+    },
+    recruiter: {
+      tag: "Tarjeta Profesional NFC",
+      title: "Oscar Mochizaki",
+      role: "Ingeniero de Software",
+      subrole: "Fundador e Ingeniero de Software — CodingSoft Technology",
+      desc: "Ingeniero de Software Full-Stack enfocado en construir sistemas de negocios escalables, aplicaciones web y herramientas de automatización.",
+      viewResume: "Ver Currículum (PDF)",
+      linkedin: "LinkedIn",
+      github: "GitHub",
+      viewProjects: "Ver Portafolio",
+      email: "Enviar Correo"
     },
     publicProjects: {
       tag: "Software de Producción",
