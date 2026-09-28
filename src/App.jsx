@@ -35,7 +35,7 @@ export default function OscarMochizakiPortfolio() {
   };
 
   const t = translations[lang];
-  const resumeLink = "/resume/OMochizaki.pdf";
+  const resumeLink = "/resume/Oscar_Mochizaki_Resume.pdf";
   const linkedinLink = "https://www.linkedin.com/in/oscarmochizaki/";
   const githubLink = "https://github.com/oymg81";
   const emailLink = "mailto:oscar@codingsoft.tech";
@@ -372,6 +372,36 @@ export default function OscarMochizakiPortfolio() {
               <h2 className="text-3xl font-bold">{t.about.title}</h2>
               <p className="mt-5 leading-8 text-slate-300">{t.about.desc1}</p>
               <p className="mt-4 leading-8 text-slate-300">{t.about.desc2}</p>
+
+              <div className="mt-6 pt-6 border-t border-white/10 space-y-5 text-sm text-slate-300">
+                <div>
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-[#8CB2FF] mb-2">
+                    {t.about.educationTitle}
+                  </h3>
+                  <p className="leading-relaxed">
+                    <strong className="font-semibold text-white">{t.about.education.degree}</strong>
+                    <span>, {t.about.education.institution}</span>
+                    <span className="mx-2 text-slate-500">·</span>
+                    <strong className="font-semibold text-white">{t.about.education.honors}</strong>
+                    <span className="mx-2 text-slate-500">·</span>
+                    <strong className="font-semibold text-white">{t.about.education.deansList}</strong>
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-[#8CB2FF] mb-2">
+                    {t.about.credentialsTitle}
+                  </h3>
+                  <ul className="space-y-2">
+                    {t.about.credentials.map((cred, idx) => (
+                      <li key={idx} className="leading-relaxed">
+                        <span className="text-slate-200">{cred.name}</span>{' '}
+                        <span className="text-slate-400">({cred.detail})</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
 
             <div className="rounded-[28px] border border-white/10 bg-[#0D1529] p-8 lg:p-10 flex flex-col relative overflow-hidden">

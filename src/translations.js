@@ -92,6 +92,24 @@ export const translations = {
       title: "About Me",
       desc1: "I’m Oscar Mochizaki, a Computer Science graduate from Florida International University. As a software engineer and founder, I'm passionate about building real-world software and helping businesses modernize digitally.",
       desc2: "My focus lies in creating scalable systems, automation tools, and practical digital products that combine polished frontend experiences with strong backend logic.",
+      educationTitle: "Education",
+      education: {
+        degree: "B.A. in Computer Science",
+        institution: "Florida International University",
+        honors: "Cum Laude",
+        deansList: "Dean’s List (4 terms)",
+      },
+      credentialsTitle: "Credentials & Programs",
+      credentials: [
+        {
+          name: "Artificial Intelligence in Crime Analysis and Detection",
+          detail: "FIU micro-credential, 2025",
+        },
+        {
+          name: "FIU Global Career Accelerator",
+          detail: "Podium Education, Fall 2025",
+        },
+      ],
       coreTag: "Core Competencies",
       sysArch: "Systems Architecture",
       sysArchDesc: "Designing scalable backends and APIs for complex workflows.",
@@ -218,6 +236,24 @@ export const translations = {
       title: "Sobre Mí",
       desc1: "Soy Oscar Mochizaki, graduado en Ciencias de la Computación de la Universidad Internacional de Florida. Como ingeniero de software y fundador, me apasiona construir software del mundo real y ayudar a los negocios a modernizarse digitalmente.",
       desc2: "Mi enfoque radica en crear sistemas escalables, herramientas de automatización y productos digitales prácticos que combinan una experiencia visual pulida con una lógica backend sólida.",
+      educationTitle: "Educación",
+      education: {
+        degree: "B.A. en Ciencias de la Computación",
+        institution: "Florida International University",
+        honors: "Cum Laude",
+        deansList: "Dean’s List (4 semestres)",
+      },
+      credentialsTitle: "Credenciales y Programas",
+      credentials: [
+        {
+          name: "Artificial Intelligence in Crime Analysis and Detection",
+          detail: "Microcredencial de FIU, 2025",
+        },
+        {
+          name: "FIU Global Career Accelerator",
+          detail: "Podium Education, otoño de 2025",
+        },
+      ],
       coreTag: "Competencias Principales",
       sysArch: "Arquitectura de Sistemas",
       sysArchDesc: "Diseño de backends escalables y APIs para flujos de trabajo complejos.",
