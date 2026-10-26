@@ -255,7 +255,7 @@ export default function OscarMochizakiPortfolio() {
                   desc: t.publicProjects.boundlessDesc,
                   tech: "Next.js • TypeScript • Vercel • Bilingual EN/ES • SEO • CCB Integration",
                   ctaLabel: t.publicProjects.visitWebsite,
-                  link: "https://boundlesschurch.com"
+                  link: "https://boundless-church-web.vercel.app/"
                 },
                 {
                   title: "Logisti-K",
